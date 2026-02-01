@@ -1,12 +1,30 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Delete, Get, Post } from '@nestjs/common';
+import { UserDto } from './dto/user.dto';
 
 @Controller('users')
 export class UsersController {
+  private users: UserDto[] = [
+    { id: 1, name: 'John Doe', email: 'john.doe@example.com', age: 30 },
+    { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com', age: 25 },
+    {
+      id: 3,
+      name: 'Alice Johnson',
+      email: 'alice.johnson@example.com',
+      age: 28,
+    },
+  ];
   @Get()
   getAllUsers() {
-    return [
-      { id: 1, name: 'John Doe' },
-      { id: 2, name: 'Jane Smith' },
-    ];
+    return this.users;
+  }
+
+  @Post()
+  createUser() {
+    return { id: 3, name: 'New User' };
+  }
+
+  @Delete(':id')
+  deleteUser() {
+    return { message: 'User deleted successfully' };
   }
 }
