@@ -1,4 +1,11 @@
-import { IsEmail, IsInt, IsNumber, IsString, max, min } from 'class-validator';
+import {
+  IsEmail,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  Min,
+} from 'class-validator';
 
 export class UserDto {
   @IsNumber()
@@ -17,8 +24,6 @@ export class createUserDto {
   @IsEmail()
   email: string;
   @IsInt()
-  @min(0)
-  @max(80)
   age: number;
 }
 
@@ -28,7 +33,21 @@ export class updateUserDto {
   @IsEmail()
   email?: string;
   @IsInt()
-  @min(0)
-  @max(80)
   age?: number;
+}
+
+export class User {
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+  @IsEmail()
+  email: string;
+  @IsNotEmpty()
+  @Min(8)
+  password: string;
+  @IsString()
+  major: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date;
 }

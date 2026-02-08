@@ -8,8 +8,6 @@ import {
   Patch,
   Post,
   Query,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { UserDto, createUserDto, updateUserDto } from './dto/user.dto';
 
@@ -43,7 +41,6 @@ export class UsersController {
   }
 
   @Post()
-  @UsePipes(new ValidationPipe())
   createUser(@Body() createUserDto: createUserDto) {
     const newUser: UserDto = {
       id: this.users.length + 1,
