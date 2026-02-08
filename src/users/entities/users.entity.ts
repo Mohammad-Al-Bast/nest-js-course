@@ -3,11 +3,14 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToMany,
+  // OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Address } from './address.entity';
+import { Product } from 'src/products/entities/products.entity';
 
 @Entity('users')
 export class User {
@@ -30,4 +33,10 @@ export class User {
 
   @OneToOne(() => Address, (address) => address.user)
   address: Address;
+
+  // @OneToMany(() => Product, (product) => product.user)
+  // products: Product[];
+
+  @ManyToMany(() => Product, (product) => product.users)
+  products: Product[];
 }
