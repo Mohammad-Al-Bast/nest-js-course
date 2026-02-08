@@ -1,4 +1,13 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Address } from './address.entity';
 
 @Entity('users')
 export class User {
@@ -18,4 +27,7 @@ export class User {
   updatedAt: Date;
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToOne(() => Address, (address) => address.user)
+  address: Address;
 }
